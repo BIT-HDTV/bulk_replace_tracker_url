@@ -28,6 +28,20 @@ This tutorial works for qbitorrent, rtorrent, transmission
 
 without sudo
 
+    version=3.10.4
+    wget "https://www.python.org/ftp/python/$version/Python-$version.tgz"
+    tar -zxvf "Python-$version.tgz"
+    rm "Python-$version.tgz"
+    cd "Python-$version"
+    ./configure --prefix=$HOME/python
+    make
+    make altinstall
+    cd ..
+    rm -r "Python-$version"
+    majMin="${version%.*}"
+    ln -s "$HOME/python/bin/python${majMin}" ~/python/bin/python
+    ln -s "$HOME/python/bin/pip${majMin}" ~/python/bin/pip
+
 #### 2. Clone project
 
     open a terminal
@@ -40,7 +54,7 @@ without sudo
 
     pip3 install -r requirements.txt
 
-#### 4. Stop your client and backup the folder !!!!!
+#### 4. Stop your client and backup the folder  !!!!! (see next point)
 
 #### 5. Find out where your client stores the torrents
 
@@ -76,8 +90,12 @@ transmission
 
 #### 6. Run
 
+
     python3 bulk_replace_tracker_url.py
 
 answer the prompts
+
+I advice to not run this script directly on the live client torrent's folder
+This scripts makes a .bak file of the modified file already but just to be on the safe side.
 
 #### 7. Start your client
